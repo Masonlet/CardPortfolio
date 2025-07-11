@@ -16,13 +16,13 @@
 body {
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(var(--gradient-angle), var(--gradient-colours));
-  background-size: 400% 400%;
+  overflow: hidden;
   display: grid;
   place-items: center;
   perspective: 1200px;
+  background: linear-gradient(var(--gradient-angle), var(--gradient-colours));
+  background-size: 400% 400%;
   animation: gradient 10s ease infinite;
-  overflow: hidden;
 }
 
 @keyframes gradient {
@@ -34,9 +34,9 @@ body {
   width: 80vw;
   height: 70vh;
   position: relative;
+  cursor: grab;
   transform-style: preserve-3d;
   transition: transform 0.3s ease;
-  cursor: grab;
 }
 
 .card:active {
@@ -53,11 +53,44 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   backface-visibility: hidden;
   pointer-events: none;
 }
 
 .card-back {
   transform: rotateY(180deg);
+}
+
+.card-half {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.card-quarter {
+  flex: 1;
+  padding: 4rem;
+  box-sizing: border-box;
+}
+
+.card-quarter.top-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-quarter.top-left h1 {
+  font-size: 4.4rem;
+}
+.card-quarter.top-left h2 {
+  font-size: 1.8rem;
+}
+
+.personal-photo {
+  width: 100%;
+  max-width: 75%;
+  max-height: 95%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
