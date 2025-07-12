@@ -1,6 +1,7 @@
 const card = document.getElementById('card');
 
 let isDragging = false;
+let isSpinning = true;
 let needUpdate = true;
 let lastX = 0;
 let lastY = 0;
@@ -9,6 +10,11 @@ let rotY = 0;
 let rotZ = 0;
 
 function updateRotation() {
+  if(isSpinning){
+    rotY += 0.15;
+    needUpdate = true;
+  }
+
   if(needUpdate){
     card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
     needUpdate = false;
@@ -17,7 +23,14 @@ function updateRotation() {
 }
 updateRotation();
 
+function stopSpinning(){
+  if (isSpinning){
+    isSpinning = false;
+  }
+}
+
 function startDrag(x, y) {
+  stopSpinning();
   isDragging = true;
 
   lastX = x;
@@ -55,6 +68,8 @@ card.addEventListener('touchend', stopDrag);
 
 // Keyboard
 window.addEventListener('keydown', e => {
+  stopSpinning();
+
   const step = 5;
   switch (e.key.toLowerCase()) {
     case 'arrowup':
