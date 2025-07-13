@@ -9,6 +9,7 @@ let rotX = 0;
 let rotY = 0;
 let rotZ = 0;
 
+// Card Rotation
 function updateRotation() {
   if(isSpinning){
     rotY += 0.15;
@@ -23,22 +24,17 @@ function updateRotation() {
 }
 updateRotation();
 
-function stopSpinning(){
-  if (isSpinning){
-    isSpinning = false;
-  }
-}
-
+// Dragging
 function startDrag(x, y) {
-  stopSpinning();
   isDragging = true;
+  isSpinning = false;
 
   lastX = x;
   lastY = y;
 }
 
 function dragTo(x, y) {
-   if (!isDragging) return;
+  if (!isDragging) return;
 
   const dx = x - lastX;
   const dy = y - lastY;
@@ -68,7 +64,7 @@ card.addEventListener('touchend', stopDrag);
 
 // Keyboard
 window.addEventListener('keydown', e => {
-  stopSpinning();
+  isSpinning = false;
 
   const step = 5;
   switch (e.key.toLowerCase()) {
@@ -85,3 +81,64 @@ window.addEventListener('keydown', e => {
   needUpdate = true;
 });
 
+// Projects
+const projectCards = document.querySelectorAll('.project-card');
+const grid = document.querySelector('.projects-grid');
+const details = document.querySelector('.project-details');
+
+const projectData = {
+  'portfolio': {
+    title: 'Portfolio',
+    description: 'A personal site showcasing my skills and projects. Built with HTML, CSS, and JavaScript.',
+    image: 'assets/portfolio.png'
+  },
+  'task-tracker': {
+    title: 'Task Tracker',
+    description: 'A Windows utility that customizes folder icons and tracks tasks. Built with C++ and Win32 APIs.',
+    image: 'assets/task-tracker.png'
+  },
+  'opengl-engine': {
+    title: 'OpenGL Engine',
+    description: 'A modern C++ OpenGL engine/framework. Supports scenes, lights, PLY mesh loading',
+    image: 'assets/opengl.png'
+  }
+};
+
+projectCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const key = card.getAttribute('data-project');
+    const data = projectData[key];
+
+    grid.classList.add('fade-out');
+    setTimeout(() => {
+      grid.style.display = 'none';
+      grid.classList.remove('fade-out');
+
+      details.innerHTML = `
+<h3>${data.title}</h3>
+<p>${data.description}</p>
+<img src="${data.image}" alt="${data.title}" class="project-preview" />
+<button id="back-to-grid">← Back to Projects</button>
+`;
+      details.classList.remove('hidden');
+      details.classList.add('fade-out');
+      details.offsetHeight; 
+      details.classList.remove('fade-out');
+    }, 300);
+  });
+});
+
+document.addEventListener('click', e => {
+  if (e.target.id === 'back-to-grid') {
+    details.classList.add('fade-out');
+    setTimeout(() => {
+      details.classList.add('hidden');
+      details.classList.remove('fade-out');
+
+      grid.style.display = 'grid';
+      grid.classList.add('fade-out');
+      grid.offsetHeight;
+      grid.classList.remove('fade-out');
+    }, 300);
+  }
+});

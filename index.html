@@ -11,9 +11,11 @@
       <div class="card-face card-front">
         <div class="card-half top">
           <div class="card-quarter top-left">
-            <h1>Mason L'Etoile</h1>
-            <h2>Computer Programming & Analysis</h2>
-            <h2>Fanshawe College</h2>
+            <div class ="details">
+              <h1>Mason L'Etoile</h1>
+              <h2>Computer Programming & Analysis</h2>
+              <h2>Fanshawe College</h2>
+            </div>
           </div>
           <div class="card-quarter top-right">
             <img src="assets/me.png" alt="Mason L'Etoile" class="personal-photo"/>
@@ -39,15 +41,28 @@
         </div>
       </div>
       <div class="card-face card-back">
-        <h2>Projects</h2>
-        <ul>
-          <li><strong>Portfolio</strong></li>
-          <li><strong>Task Tracker</strong></li>
-          <li><strong>OpenGL Engine</strong></li>
-        </ul>
+        <div class="projects">
+          <h2 class="projects-title">Projects</h2>
+          <div class="projects-grid">
+            <div class="project-card" data-project="portfolio">
+              <h4>Portfolio</h4>
+              <img src="assets/portfolio.png" alt="Portfolio" />
+            </div>
+            <div class="project-card" data-project="task-tracker">
+              <h4>Task Tracker</h4>
+              <img src="assets/task-tracker.png" alt="Task Tracker" />
+            </div>
+            <div class="project-card" data-project="opengl-engine">
+              <h4>OpenGL Engine</h4>
+              <img src="assets/opengl.png" alt="OpenGL Engine" />
+            </div>
+          </div>
+          <div class="project-details hidden">
+            <!--Dynamically Filled-->
+          </div>
+        </div>
       </div>
     </div>
-
     <script src="script.js"></script>
   </body>
 </html>
