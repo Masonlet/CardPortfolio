@@ -83,8 +83,8 @@ window.addEventListener('keydown', e => {
 
 // Projects
 const projectCards = document.querySelectorAll('.project-card');
-const grid = document.querySelector('.projects-grid');
-const details = document.querySelector('.project-details');
+const grid = document.querySelector('#projects-grid');
+const details = document.querySelector('#project-details');
 
 const projectData = {
   'portfolio': {
@@ -115,11 +115,11 @@ projectCards.forEach(card => {
       grid.classList.remove('fade-out');
 
       details.innerHTML = `
-<h3>${data.title}</h3>
-<p>${data.description}</p>
-<img src="${data.image}" alt="${data.title}" class="project-preview" />
-<button id="back-to-grid">← Back to Projects</button>
-`;
+        <h3>${data.title}</h3>
+        <p>${data.description}</p>
+        <img src="${data.image}" alt="${data.title}" id="project-preview" />
+        <button id="back-to-grid">← Back to Projects</button>
+      `;
       details.classList.remove('hidden');
       details.classList.add('fade-out');
       details.offsetHeight; 
